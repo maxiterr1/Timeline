@@ -1,29 +1,20 @@
 draw_line_width(160, room_height, 160, 0, 10)
 draw_circle(160, altezzaCerchio, 34, false)
-draw_text_transformed(220 , altezzaCerchio - 20, anni[annoCorrente], 2, 2, 18)
-draw_sprite(Sprite1, -1, 400, altezzaCerchio - sprite_get_height(Sprite1))
+draw_text_transformed(220 , altezzaCerchio - 20, anni[annoCorrente], 1, 1, 18)
+draw_sprite_ext(immagine[annoCorrente], -1, 400, altezzaCerchio - sprite_get_height(Sprite1), dimensioni[annoCorrente], dimensioni[annoCorrente], 0, -1, 1)
 draw_set_font(fnt_font)
-draw_text_transformed(400, altezzaCerchio + 20, "SPIEGO TUTTO SPIEGO TUTTO SPIEGO TUTTO \nSPIEGO TUTTO SPIEGO TUTTO SPIEGO TUTTO \nSPIEGO TUTTO SPIEGO TUTTO SPIEGO TUTTO \nSPIEGO TUTTO SPIEGO TUTTO SPIEGO TUTTO \nSPIEGO TUTTO SPIEGO TUTTO SPIEGO TUTTO \nSPIEGO TUTTO SPIEGO TUTTO SPIEGO TUTTO \n", 2, 2, 0)
+draw_text(400, altezzaCerchio + 20, descrizione[annoCorrente])
 
-if annoCorrente != 0 {
-	draw_sprite(spr_freccia, -1, 160 - sprite_get_width(spr_freccia) / 2, altezzaFreccia1)
-	if altezzaFreccia1 == room_height - 50
-		frecciaSuOGiu = true
-	else if altezzaFreccia1 == room_height - 70
-		frecciaSuOGiu = false
-
-	if frecciaSuOGiu
-		altezzaFreccia1--
-	else
-		altezzaFreccia1++
-}
+//Freccia verso su
 if annoCorrente != array_length(anni) - 1 {
-	draw_sprite_ext(spr_freccia, -1, 160 + sprite_get_width(spr_freccia) / 2, altezzaFreccia2, 1, 1, 180, -1, 1)
-	if frecciaSuOGiu
-		altezzaFreccia2++
-	else
-		altezzaFreccia2--
+	draw_sprite_ext(spr_freccia, -1, 160 - sprite_get_width(spr_freccia) / 2 * 0.5, -timer + sprite_get_height(spr_freccia) * 0.5 + 40, 0.5, 0.5, 90, -1, 1)
 }
+
+//Freccia verso giù
+if annoCorrente != 0 {
+	draw_sprite_ext(spr_freccia, -1, 160 + sprite_get_width(spr_freccia) / 2 * 0.5, room_height + timer - sprite_get_height(spr_freccia) * 0.5 - 40, 0.5, 0.5, -90, -1, 1)
+}
+
 if keyboard_check_released(vk_up) || mouse_wheel_up() {
 	animStep = 1
 }
@@ -38,7 +29,6 @@ if animStep != 0 && animStep < 3 {
 	}
 	
 	if altezzaCerchio >= room_height + 70 {
-		show_debug_message("Tolgo cerchio")
 		altezzaCerchio = 0
 		animStep = 2
 		annoCorrente++
@@ -53,7 +43,6 @@ if animStep != 0 && animStep < 3 {
 	}
 	
 	if altezzaCerchio <= 0 {
-		show_debug_message("Tolgo cerchio")
 		altezzaCerchio = room_height + 70
 		animStep = 4
 		annoCorrente--
