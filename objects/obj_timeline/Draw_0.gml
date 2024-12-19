@@ -1,3 +1,7 @@
+var immagineVeraAmpiezza = sprite_get_width(anni[annoCorrente].immagine) * anni[annoCorrente].dimensioni
+var immagineAnnoX = cerchioX - immagineVeraAmpiezza / 2 - room_height / 2
+var immagineAnnoY = y - 600
+
 // Disegna la linea della timeline
 draw_line_width(room_width, y, 0, 650, 10)
 
@@ -7,26 +11,25 @@ draw_circle(cerchioX, y, 34, false)
 // Imposta la font
 draw_set_font(fnt_font)
 
-// Scrivi l'anno affianco al cerchio
-draw_text_transformed(cerchioX + 20 , y, anni[annoCorrente], 1, 1, 58)
+// Scrivi l'anno sopra il cerchio
+draw_text_transformed(cerchioX - 15, y - 60, anni[annoCorrente].anno, 1, 1, 60)
 
 // Disegna l'immagine dell'anno
-draw_sprite_ext(immagine[annoCorrente], -1, cerchioX, y - 250, dimensioni[annoCorrente], dimensioni[annoCorrente], 0, -1, 1)
-
+draw_sprite_ext(anni[annoCorrente].immagine, -1, immagineAnnoX, immagineAnnoY, anni[annoCorrente].dimensioni, anni[annoCorrente].dimensioni, 0, -1, 1)
 
 // Scrivi la descrizione
-draw_text(cerchioX, y - 200, descrizione[annoCorrente])
+draw_text(immagineAnnoX + immagineVeraAmpiezza + 20, immagineAnnoY /*+ immagineVeraAltezza / 1.5*/, anni[annoCorrente].descrizione)
 
 // Se la timeline non si sta muovendo
 if animStep == 0 {
-	// Disegna la freccia verso su
+	// Disegna la freccia verso sinistra
 	if annoCorrente != array_length(anni) - 1 {
-		draw_sprite_ext(spr_freccia, -1, 160 - sprite_get_width(spr_freccia) / 2 * 0.5, -timer + sprite_get_height(spr_freccia) * 0.5, 0.5, 0.5, 90, -1, trasparenzaFrecce)
+		draw_sprite_ext(spr_freccia, -1, -timer + sprite_get_height(spr_freccia) * 0.5, y + sprite_get_width(spr_freccia) / 2 * 0.5, 0.5, 0.5, 180, -1, trasparenzaFrecce)
 	}
 
-	// Disegna la freccia verso giù
+	// Disegna la freccia verso destra
 	if annoCorrente != 0 {
-		draw_sprite_ext(spr_freccia, -1, 160 + sprite_get_width(spr_freccia) / 2 * 0.5, room_height + timer - sprite_get_height(spr_freccia) * 0.5, 0.5, 0.5, -90, -1, trasparenzaFrecce)
+		draw_sprite_ext(spr_freccia, -1, room_width - (-timer + sprite_get_width(spr_freccia) * 0.5), y - sprite_get_width(spr_freccia) / 2 * 0.5, 0.5, 0.5, 0, -1, trasparenzaFrecce)
 	}
 }
 
@@ -56,7 +59,7 @@ if animStep != 0 and animStep < 3 {
 	// altezzaCerchio < room_height / 2 risolve un bug non importante.
 	if (annoCorrente != array_length(anni) - 1 or cerchioX < room_width / 2) and animStep == 1
 		// Porta giù il cerchio di 7 pixel
-		cerchioX += 7
+		cerchioX += 10
 	
 	// Controlla se il cerchio ha raggiunto la fine della stanza verso il basso
 	if cerchioX >= room_width + 70 {
@@ -71,13 +74,13 @@ if animStep != 0 and animStep < 3 {
 	}
 	
 	if cerchioX <= room_width / 2 and animStep == 2
-		cerchioX += 7
+		cerchioX += 10
 
 // Se c'è un'animazione verso l'anno precedente in corso,
 // Succede la stessa cosa dell'anno successivo, ma tutto invertito.
 } else {
 	if (annoCorrente != 0 or cerchioX > room_width / 2) and animStep == 3
-		cerchioX -= 7
+		cerchioX -= 10
 	
 	
 	if cerchioX <= 0 {
@@ -87,10 +90,14 @@ if animStep != 0 and animStep < 3 {
 	}
 	
 	if cerchioX > room_width / 2 and animStep == 4
-		cerchioX -= 7
+		cerchioX -= 10
 
 }
 
 // Se non c'è nessuna animazione in corso, imposta il flag di animazione su 0
-if cerchioX < room_width / 2 - 10 and cerchioX > room_width / 2 + 10
+// e il cerchio al centro perfetto.
+if cerchioX == 676 or cerchioX == 690 {
 	animStep = 0
+	cerchioX = room_width / 2
+}
+//676

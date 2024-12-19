@@ -30,13 +30,14 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.1100.0.713",
+    "IDEVersion":"2024.11.0.179",
   },
   "name":"Timeline",
   "resources":[
     {"id":{"name":"fnt_font","path":"fonts/fnt_font/fnt_font.yy",},},
     {"id":{"name":"obj_timeline","path":"objects/obj_timeline/obj_timeline.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
+    {"id":{"name":"scr_class_punti","path":"scripts/scr_class_punti/scr_class_punti.yy",},},
     {"id":{"name":"spr_freccia","path":"sprites/spr_freccia/spr_freccia.yy",},},
     {"id":{"name":"Sprite1","path":"sprites/Sprite1/Sprite1.yy",},},
     {"id":{"name":"Sprite2","path":"sprites/Sprite2/Sprite2.yy",},},
