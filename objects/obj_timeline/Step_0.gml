@@ -1,6 +1,6 @@
 if timer == 0
 	timerSuOGiu = true
-else if timer == 70
+else if timer == 30
 	timerSuOGiu = false
 
 if timerSuOGiu

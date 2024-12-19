@@ -11,8 +11,8 @@
   "name":"obj_timeline",
   "overriddenProperties":[],
   "parent":{
-    "name":"Percorsi",
-    "path":"folders/Percorsi.yy",
+    "name":"Oggetti",
+    "path":"folders/Oggetti.yy",
   },
   "parentObjectId":null,
   "persistent":false,
