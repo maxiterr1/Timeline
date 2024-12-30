@@ -1,4 +1,4 @@
-function nuovo_anno(_anno, _descrizione, _immagine, _dimensioni){
+function nuovo_anno(_anno, _descrizione, _immagine, _dimensioni) {
 	return {
 		anno: _anno,
 		descrizione : _descrizione,
