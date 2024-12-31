@@ -38,6 +38,7 @@
     {"id":{"name":"obj_timeline","path":"objects/obj_timeline/obj_timeline.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"id":{"name":"scr_class_punti","path":"scripts/scr_class_punti/scr_class_punti.yy",},},
+    {"id":{"name":"scr_ini_string","path":"scripts/scr_ini_string/scr_ini_string.yy",},},
     {"id":{"name":"spr_freccia","path":"sprites/spr_freccia/spr_freccia.yy",},},
     {"id":{"name":"spr_none","path":"sprites/spr_none/spr_none.yy",},},
   ],
