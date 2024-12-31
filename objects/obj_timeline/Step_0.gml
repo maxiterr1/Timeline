@@ -20,4 +20,3 @@ if exMouseX != mouse_x or exMouseY != mouse_y {
 } else
 	mouseTimer++
 	
-show_debug_message(cerchioX)

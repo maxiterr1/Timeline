@@ -1,6 +1,5 @@
-window_set_caption("Il capitalismo")
-
 ini_open("info.ini")
+ini_write_string("te", "fkk", "Ciaao\nxcjdjj\nporco")
 if ini_read_real("start", 1, 1) {
 	if show_question("Sembra che sia la tua prima volta in Timeline.\nVuoi capire come si usa?") {
 		url_open(game_save_id + "h.html")
@@ -15,15 +14,20 @@ if !file_exists("linea.ini") {
 
 ini_open("linea.ini")
 
+window_set_caption(ini_read_string("info", "caption", "Timeline"))
+
 for (var i = 0; ini_section_exists(i); i++) {
 	anno = ini_read_real(i, "a", 0)
 	descrizione = ini_read_string(i, "des", "")
+	descrizione = string_split(descrizione, "&&")
 	file = ini_read_string(i, "imm", "")
-	if !file_exists(file) {
+	if file == "none"
+		immagine = spr_none
+	else if !file_exists(file) {
 		show_message("File " + file + " non trovato!")
 		game_end(1)
-	}
-	immagine = sprite_add(file, 1, false, false, 0, 0)
+	} else
+		immagine = sprite_add(file, 1, false, false, 0, 0)
 	dimensioni = ini_read_real(i, "dim", 0)
 	anni[i] = nuovo_anno(anno, descrizione, immagine, dimensioni)
 }
