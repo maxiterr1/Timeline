@@ -1,15 +1,32 @@
-var immagineVeraAmpiezza = sprite_get_width(anni[annoCorrente].immagine) * anni[annoCorrente].dimensioni
-var immagineAnnoX = cerchioX - immagineVeraAmpiezza / 2 - room_height / 2
-var immagineAnnoY = y - 600
-
 // Imposta la font
 draw_set_font(fnt_font)
 
 if intro == 1 {
-	draw_text_transformed(100, 100, header, textdim, textdim, 0)
+	var immagineVeraAmpiezza = sprite_get_width(introimm) * introimmdim
+	var immagineVeraAltezza = sprite_get_height(introimm) * introimmdim
+	var headerY
+	var headerX
+	var descrizioneY
+	if headerdove == "affianco" && introimm != spr_none{
+		headerX = immagineVeraAmpiezza + 50
+		headerY = 50
+		descrizioneY = immagineVeraAltezza + 50
+	} else {
+		headerX = 50
+		headerY = immagineVeraAltezza + 50
+		descrizioneY = headerY + headerIntroNewLineCount * headerdim * font_get_size(fnt_font) * 2 + 40
+	}
+	var y_offset = 50
+	var x_offset = introimm == spr_none ? 20 : 0
+	draw_text_transformed(headerX, headerY, header, headerdim, headerdim, 0)
+	draw_text_transformed(50 + x_offset, descrizioneY, descrizioneIntro, descrizioneIntroDim, descrizioneIntroDim, 0)
+	draw_sprite_ext(introimm, -1, 50, 50, introimmdim, introimmdim, 0, -1, 1)
 	if keyboard_check_released(vk_space)
 		intro = 2
 } else {
+	var immagineVeraAmpiezza = sprite_get_width(anni[annoCorrente].immagine) * anni[annoCorrente].dimensioni
+	var immagineAnnoX = cerchioX - immagineVeraAmpiezza / 2 - room_height / 2
+	var immagineAnnoY = y - 600
 
 	// Disegna la linea della timeline
 	draw_line_width(room_width, y, 0, 650, 10)
