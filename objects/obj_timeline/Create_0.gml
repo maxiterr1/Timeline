@@ -8,7 +8,7 @@ ini_close()
 */
 
 if !file_exists("linea.ini") {
-	show_message("File linea.ini non trovato!")
+	show_message($"File linea.ini non trovato! {game_save_id}")
 	game_end(1)
 }
 
@@ -19,9 +19,8 @@ window_set_caption(ini_read_string("info", "caption", "Timeline"))
 for (var i = 0; ini_section_exists(i); i++) {
 	anno = ini_read_real(i, "a", 0)
 	descrizione = ini_string(ini_read_string(i, "des", ""))
-	immagine = importa_immagine(ini_read_string(i, "imm", ""))
-	
-	dimensioni = ini_read_real(i, "dim", 0)
+	immagine = importa_immagine(ini_read_string(i, "imm", "none"))
+	dimensioni = ini_read_real(i, "dim", 1)
 	anni[i] = nuovo_anno(anno, descrizione, immagine, dimensioni)
 }
 

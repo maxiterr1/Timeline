@@ -7,7 +7,7 @@ if intro == 1 {
 	var headerY
 	var headerX
 	var descrizioneY
-	if headerdove == "affianco" && introimm != spr_none{
+	if headerdove == "affianco" && introimm != spr_none {
 		headerX = immagineVeraAmpiezza + 50
 		headerY = 50
 		descrizioneY = immagineVeraAltezza + 50
