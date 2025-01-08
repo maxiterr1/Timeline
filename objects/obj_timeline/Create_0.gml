@@ -7,6 +7,8 @@ if ini_read_real("start", 1, 1) {
 ini_close()
 */
 
+window_set_caption("Timeline")
+
 if !file_exists("linea.ini") {
 	show_message($"File linea.ini non trovato! {game_save_id}")
 	game_end(1)
@@ -16,26 +18,43 @@ ini_open("linea.ini")
 
 window_set_caption(ini_read_string("info", "caption", "Timeline"))
 
-for (var i = 0; ini_section_exists(i); i++) {
-	anno = ini_read_real(i, "a", 0)
-	descrizione = ini_string(ini_read_string(i, "des", ""))
-	immagine = importa_immagine(ini_read_string(i, "imm", "none"))
-	dimensioni = ini_read_real(i, "dim", 1)
+var i = 0
+while (ini_section_exists(i)) {
+	var anno = ini_read_real(i, "a", 0)
+	var descrizione = ini_string(ini_read_string(i, "des", ""))
+	var immagine = importa_immagine(ini_read_string(i, "imm", "none"))
+	var dimensioni = ini_read_real(i, "dim", 1)
 	anni[i] = nuovo_anno(anno, descrizione, immagine, dimensioni)
+	i++
 }
 
-if ini_section_exists("intro") {
-	intro = 1
-	iniHeader = ini_read_string("intro", "header", "")
-	header = ini_string(iniHeader)
-	headerIntroNewLineCount = string_count("&&", iniHeader)
-	headerdim = ini_read_real("intro", "headerdim", 1)
-	headerdove = ini_read_string("intro", "headerdove", "affianco")
-	introimm = importa_immagine(ini_read_string("intro", "imm", "none"))
-	introimmdim = ini_read_real("intro", "dim", 1)
-	descrizioneIntro = ini_string(ini_read_string("intro", "text", ""))
-	descrizioneIntroDim = ini_read_real("intro", "textdim", 1)
-} else intro = 2
+if i == 0 {
+	show_message("Nessun anno trovato nel file linea.ini!")
+	game_end(1)
+}
+
+i = 0
+while (ini_section_exists($"intro{i}")) {
+	var sezioneCorrente = $"intro{i}"
+	var iniHeader = ini_read_string(sezioneCorrente, "header", "")
+	var header = ini_string(iniHeader)
+	var headerIntroNewLineCount = string_count("&&", iniHeader)
+	var headerdim = ini_read_real(sezioneCorrente, "headerdim", 1)
+	var headerdove = ini_read_string(sezioneCorrente, "headerdove", "affianco")
+	var introimm = importa_immagine(ini_read_string(sezioneCorrente, "imm", "none"))
+	var introimmdim = ini_read_real(sezioneCorrente, "dim", 1)
+	var introimmdove = ini_read_string(sezioneCorrente, "immdove", "sin")
+	var descrizioneIntro = ini_string(ini_read_string(sezioneCorrente, "text", ""))
+	var descrizioneIntroDim = ini_read_real(sezioneCorrente, "textdim", 1)
+	intro[i] = nuova_intro(header, headerIntroNewLineCount, headerdim, headerdove, introimm, introimmdim, introimmdove, descrizioneIntro, descrizioneIntroDim)
+	i++
+}
+
+if i == 0 {
+	
+}
+
+introCorrente = i == 0 ? -1 : 0
 
 ini_close()
 

@@ -1,28 +1,31 @@
 // Imposta la font
 draw_set_font(fnt_font)
 
-if intro == 1 {
-	var immagineVeraAmpiezza = sprite_get_width(introimm) * introimmdim
-	var immagineVeraAltezza = sprite_get_height(introimm) * introimmdim
+if introCorrente != -1 {
+	var immagineVeraAmpiezza = sprite_get_width(intro[introCorrente].introimm) * intro[introCorrente].introimmdim
+	var immagineVeraAltezza = sprite_get_height(intro[introCorrente].introimm) * intro[introCorrente].introimmdim
 	var headerY
 	var headerX
 	var descrizioneY
-	if headerdove == "affianco" && introimm != spr_none {
-		headerX = immagineVeraAmpiezza + 50
+	if intro[introCorrente].headerdove == "affianco" && intro[introCorrente].introimm != spr_none {
+		headerX = immagineVeraAmpiezza + 57
 		headerY = 50
 		descrizioneY = immagineVeraAltezza + 50
 	} else {
 		headerX = 50
 		headerY = immagineVeraAltezza + 50
-		descrizioneY = headerY + headerIntroNewLineCount * headerdim * font_get_size(fnt_font) * 2 + 40
+		descrizioneY = headerY + intro[introCorrente].headerIntroNewLineCount * intro[introCorrente].headerdim * font_get_size(fnt_font) * 2 + 40
 	}
 	var y_offset = 50
-	var x_offset = introimm == spr_none ? 20 : 0
-	draw_text_transformed(headerX, headerY, header, headerdim, headerdim, 0)
-	draw_text_transformed(50 + x_offset, descrizioneY, descrizioneIntro, descrizioneIntroDim, descrizioneIntroDim, 0)
-	draw_sprite_ext(introimm, -1, 50, 50, introimmdim, introimmdim, 0, -1, 1)
+	var x_offset = intro[introCorrente].introimm == spr_none ? 20 : 0
+	draw_text_transformed(headerX, headerY, intro[introCorrente].header, intro[introCorrente].headerdim, intro[introCorrente].headerdim, 0)
+	draw_text_transformed(50 + x_offset, descrizioneY, intro[introCorrente].descrizioneIntro, intro[introCorrente].descrizioneIntroDim, intro[introCorrente].descrizioneIntroDim, 0)
+	var immX = intro[introCorrente].introimmdove == "cen" ? room_width / 2 - immagineVeraAmpiezza / 2 : 50
+	draw_sprite_ext(intro[introCorrente].introimm, -1, immX, 50, intro[introCorrente].introimmdim, intro[introCorrente].introimmdim, 0, -1, 1)
 	if keyboard_check_released(vk_space)
-		intro = 2
+		introCorrente++
+	if keyboard_check_released(ord("B"))
+		introCorrente--
 } else {
 	var immagineVeraAmpiezza = sprite_get_width(anni[annoCorrente].immagine) * anni[annoCorrente].dimensioni
 	var immagineAnnoX = cerchioX - immagineVeraAmpiezza / 2 - room_height / 2
