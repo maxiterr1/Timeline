@@ -27,6 +27,15 @@ if introCorrente != -1 {
 	if keyboard_check_released(ord("B"))
 		introCorrente--
 } else {
+	if debug {
+		var numeroPremuto = keyboard_key - 48
+		if numeroPremuto < 10 && numeroPremuto > 0 {
+			if numeroPremuto < array_length(anni)
+				annoCorrente = numeroPremuto
+		}
+		if keyboard_check_pressed(vk_space) && annoCorrente != array_length(anni) - 1
+				annoCorrente++
+	}
 	var immagineVeraAmpiezza = sprite_get_width(anni[annoCorrente].immagine) * anni[annoCorrente].dimensioni
 	var immagineAnnoX = cerchioX - immagineVeraAmpiezza / 2 - room_height / 2
 	var immagineAnnoY = y - 600

@@ -11,16 +11,17 @@ window_set_caption("Timeline")
 
 if !file_exists("linea.ini") {
 	show_message($"File linea.ini non trovato! {game_save_id}")
-	game_end(1)
+	game_restart()
 }
 
 ini_open("linea.ini")
 
 window_set_caption(ini_read_string("info", "caption", "Timeline"))
+debug = ini_read_string("info", "debug", "false") == "true"
 
 var i = 0
 while (ini_section_exists(i)) {
-	var anno = ini_read_real(i, "a", 0)
+	var anno = ini_read_string(i, "a", 0)
 	var descrizione = ini_string(ini_read_string(i, "des", ""))
 	var immagine = importa_immagine(ini_read_string(i, "imm", "none"))
 	var dimensioni = ini_read_real(i, "dim", 1)
@@ -48,10 +49,6 @@ while (ini_section_exists($"intro{i}")) {
 	var descrizioneIntroDim = ini_read_real(sezioneCorrente, "textdim", 1)
 	intro[i] = nuova_intro(header, headerIntroNewLineCount, headerdim, headerdove, introimm, introimmdim, introimmdove, descrizioneIntro, descrizioneIntroDim)
 	i++
-}
-
-if i == 0 {
-	
 }
 
 introCorrente = i == 0 ? -1 : 0

@@ -4,7 +4,7 @@ function importa_immagine(dir){
 	
 	if !file_exists(dir) {
 		show_message("File " + dir + " non trovato!")
-		game_end(1)
+		game_restart()
 	}
 	
 	return sprite_add(dir, 1, false, false, 0, 0)
