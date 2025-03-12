@@ -22,8 +22,12 @@ if introCorrente != -1 {
 	draw_text_transformed(50 + x_offset, descrizioneY, intro[introCorrente].descrizioneIntro, intro[introCorrente].descrizioneIntroDim, intro[introCorrente].descrizioneIntroDim, 0)
 	var immX = intro[introCorrente].introimmdove == "cen" ? room_width / 2 - immagineVeraAmpiezza / 2 : 50
 	draw_sprite_ext(intro[introCorrente].introimm, -1, immX, 50, intro[introCorrente].introimmdim, intro[introCorrente].introimmdim, 0, -1, 1)
-	if keyboard_check_released(vk_right) && introCorrente != array_length(intro) - 1
-		introCorrente++
+	if keyboard_check_released(vk_right) or mouse_wheel_up() {
+		if introCorrente != array_length(intro) - 1
+			introCorrente++
+		else
+			introCorrente = -1
+	}
 	if keyboard_check_released(vk_left) && introCorrente != 0
 		introCorrente--
 } else {
@@ -79,6 +83,8 @@ if introCorrente != -1 {
 
 	// Se l'utente ha cliccato la freccia giù sulla tastiera o è andato giù con la rotella del mouse
 	if keyboard_check_released(vk_right) or mouse_wheel_down() {
+			if annoCorrente == 0 && array_length(intro) != 0
+				introCorrente = array_length(intro) - 1
 		// Avvia l'animazione verso l'anno precedente
 		animStep = 3
 	
